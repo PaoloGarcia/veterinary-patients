@@ -12,7 +12,11 @@ class App extends Component {
         return (
             <div className="container">
                 <Header title="Veterinary Patients Administrator" />
-                <NewAppointment />
+                <div className="row">
+                    <div className="col-md-10 mx-auto">
+                        <NewAppointment />
+                    </div>
+                </div>
             </div>
         );
     }
