@@ -37,6 +37,7 @@ header h1 {
 }
 
 .lista-citas .media-body span {
+  color: #333;
   font-weight: bold;
 }
 
