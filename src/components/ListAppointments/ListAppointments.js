@@ -4,20 +4,27 @@ import PropTypes from "prop-types";
 // components
 import ItemAppointment from "../ItemAppointment/ItemAppointment";
 
-const ListAppointments = ({ appointments }) => {
+const ListAppointments = ({ appointments, onDeleteAppointment }) => {
+    const title = appointments.length === 0 ?
+        "No appointments yet" : "Appointments";
+
+    const listAppointements = appointments.map(appointment => (
+        <ItemAppointment
+            key={appointment.id}
+            appointment={appointment}
+            onDeleteAppointment={() => onDeleteAppointment(appointment.id)}
+        />
+    ));
+
     return (
         <div className="card mt-2 p-3">
             <div className="card-body">
                 <h3 className="card-title text-center">
-                    Appointments
+                    {title}
                 </h3>
 
                 <div className="lista-citas">
-                    {
-                        appointments.map(appointment => {
-                            return <ItemAppointment key={appointment.id} appointment={appointment} />
-                        })
-                    }
+                    {listAppointements}
                 </div>
             </div>
         </div>
@@ -26,6 +33,7 @@ const ListAppointments = ({ appointments }) => {
 
 ListAppointments.propTypes = {
     appointments: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onDeleteAppointment: PropTypes.func.isRequired,
 };
 
 export default ListAppointments;

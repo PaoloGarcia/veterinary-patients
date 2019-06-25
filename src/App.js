@@ -11,10 +11,32 @@ class App extends Component {
         appointments: [],
     };
 
+    componentDidMount() {
+        const appointments = localStorage.getItem("appointments");
+
+        if (appointments) {
+            this.setState({
+                appointments: JSON.parse(appointments),
+            });
+        }
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem("appointments", JSON.stringify(this.state.appointments));
+    }
+
     onCreateAppointment = appointment => {
         this.setState({
             appointments: [...this.state.appointments, appointment],
         });
+    }
+
+    onDeleteAppointment = id => {
+        const appointments = this.state.appointments.filter(appointment => {
+            return appointment.id !== id;
+        });
+
+        this.setState({ appointments });
     }
 
     render() {
@@ -30,7 +52,10 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="mt-5 col-md-10 mx-auto">
-                        <ListAppointments appointments={appointments} />
+                        <ListAppointments
+                            appointments={appointments}
+                            onDeleteAppointment={this.onDeleteAppointment}
+                        />
                     </div>
                 </div>
             </div>

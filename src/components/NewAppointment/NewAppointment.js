@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import uuid from "uuid";
 
@@ -17,6 +18,10 @@ const initialState = {
 class NewAppointment extends Component {
     state = {
         ...initialState,
+    };
+
+    static propTypes = {
+        onCreateAppointment: PropTypes.func.isRequired,
     };
 
     onChangeFieldHndlr = e => {
