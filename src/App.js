@@ -25,11 +25,7 @@ class App extends Component {
         localStorage.setItem("appointments", JSON.stringify(this.state.appointments));
     }
 
-    onCreateAppointment = appointment => {
-        this.setState({
-            appointments: [...this.state.appointments, appointment],
-        });
-    }
+    onCreateAppointment = appointment => this.setState({ appointments: [...this.state.appointments, appointment], });
 
     onDeleteAppointment = id => {
         const appointments = this.state.appointments.filter(appointment => {
