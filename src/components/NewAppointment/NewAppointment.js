@@ -24,11 +24,16 @@ class NewAppointment extends Component {
         onCreateAppointment: PropTypes.func.isRequired,
     };
 
-    onChangeFieldHndlr = e => {
-        this.setState({ appointment: { ...this.state.appointment, [e.target.name]: e.target.value } });
+    onChangeFieldHndlr = (e) => {
+        this.setState({ 
+            appointment: { 
+                ...this.state.appointment,
+                [e.target.name]: e.target.value
+            },
+        });
     }
 
-    onSubmitFormHndlr = e => {
+    onSubmitFormHndlr = (e) => {
         e.preventDefault();
 
         const { pet, owner, date, time, symptoms } = this.state.appointment;

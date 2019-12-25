@@ -13,11 +13,11 @@ const ItemAppointment = ({ appointment, onDeleteAppointment }) => {
                 <p className="card-text"><span>Time: </span>{appointment.time}</p>
                 <p className="card-text"><span>Symptoms: </span>{appointment.symptoms}</p>
 
-                {/* <button
+                <button
                     className="btn btn-danger"
                     data-toggle="modal"
                     data-target="#deleteModal"
-                // onClick={onDeleteAppointment}
+                    onClick={onDeleteAppointment}
                 >
                     Delete Appointment
                 </button>
@@ -47,11 +47,11 @@ const ItemAppointment = ({ appointment, onDeleteAppointment }) => {
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
 
 
 
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                {/* <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Launch demo modal
                 </button>
 
@@ -73,7 +73,7 @@ const ItemAppointment = ({ appointment, onDeleteAppointment }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
             </div>
         </div>

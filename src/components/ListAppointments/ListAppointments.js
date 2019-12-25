@@ -5,10 +5,9 @@ import PropTypes from "prop-types";
 import ItemAppointment from "../ItemAppointment/ItemAppointment";
 
 const ListAppointments = ({ appointments, onDeleteAppointment }) => {
-    const title = appointments.length === 0 ?
-        "No appointments yet" : "Appointments";
+    const title = appointments.length === 0 ? "No appointments yet" : "Appointments";
 
-    const listAppointements = appointments.map(appointment => (
+    const listAppointments = appointments.map(appointment => (
         <ItemAppointment
             key={appointment.id}
             appointment={appointment}
@@ -22,9 +21,8 @@ const ListAppointments = ({ appointments, onDeleteAppointment }) => {
                 <h3 className="card-title text-center">
                     {title}
                 </h3>
-
                 <div className="lista-citas">
-                    {listAppointements}
+                    {listAppointments}
                 </div>
             </div>
         </div>
