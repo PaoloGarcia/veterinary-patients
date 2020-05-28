@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
-const ItemAppointment = ({ appointment, onDeleteAppointment }) => {
+function ItemAppointment({ appointment, onDeleteAppointment }) {
     return (
         <div className="media mt-3">
             <div className="media-body">
@@ -51,7 +51,7 @@ const ItemAppointment = ({ appointment, onDeleteAppointment }) => {
             </div>
         </div>
     );
-};
+}
 
 ItemAppointment.propTypes = {
     appointment: PropTypes.objectOf(PropTypes.string).isRequired,

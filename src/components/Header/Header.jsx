@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
-const Header = ({ title }) => {
+function Header({ title }) {
     return (
         <header>
             <h1 className="text-center">
@@ -9,7 +9,7 @@ const Header = ({ title }) => {
             </h1>
         </header>
     );
-};
+}
 
 Header.defaultProps = {
     title: "Veterinary Patients Administrator",

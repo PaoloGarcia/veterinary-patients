@@ -3,8 +3,8 @@ import "./bootstrap.min.css";
 
 // components
 import Header from "./components/Header/Header";
-import NewAppointment from "./components/NewAppointment/NewAppointment";
 import ListAppointments from "./components/ListAppointments/ListAppointments";
+import NewAppointment from "./components/NewAppointment/NewAppointment";
 
 class App extends Component {
     state = {
@@ -23,9 +23,8 @@ class App extends Component {
         localStorage.setItem("appointments", JSON.stringify(this.state.appointments));
     }
 
-    onCreateAppointment = (appointment) => {
+    onCreateAppointment = (appointment) =>
         this.setState({ appointments: [...this.state.appointments, appointment] });
-    }
 
     onDeleteAppointment = (id) => {
         const appointments = this.state.appointments.filter((appointment) => {
@@ -33,7 +32,7 @@ class App extends Component {
         });
 
         this.setState({ appointments });
-    }
+    };
 
     render() {
         const { appointments } = this.state;

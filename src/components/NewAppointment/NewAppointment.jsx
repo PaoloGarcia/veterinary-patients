@@ -1,6 +1,5 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import React, { Component } from "react";
 import uuid from "uuid";
 
 // initial state
@@ -39,7 +38,8 @@ class NewAppointment extends Component {
         const { pet, owner, date, time, symptoms } = this.state.appointment;
 
         // validate
-        if (pet === "" || owner === "" || date === "" || time === "" || symptoms === "") {
+        if (pet === "" || owner === "" || date === "" || 
+            time === "" || symptoms === "") {
             this.setState({ error: true });
             return;
         }

@@ -1,10 +1,10 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
 // components
 import ItemAppointment from "../ItemAppointment/ItemAppointment";
 
-const ListAppointments = ({ appointments, onDeleteAppointment }) => {
+function ListAppointments({ appointments, onDeleteAppointment }) {
     const title = appointments.length === 0 ? "No appointments yet" : "Appointments";
 
     const listAppointments = appointments.map(appointment => (
@@ -27,7 +27,7 @@ const ListAppointments = ({ appointments, onDeleteAppointment }) => {
             </div>
         </div>
     );
-};
+}
 
 ListAppointments.propTypes = {
     appointments: PropTypes.arrayOf(PropTypes.object).isRequired,
