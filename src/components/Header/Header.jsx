@@ -1,22 +1,16 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from "prop-types"
+import React from "react"
 
-function Header({ title }) {
+function Header({ title = "" }) {
     return (
         <header>
-            <h1 className="text-center">
-                {title}
-            </h1>
+            <h1 className="text-center">{title}</h1>
         </header>
-    );
+    )
 }
 
-Header.defaultProps = {
-    title: "Veterinary Patients Administrator",
-};
-
 Header.propTypes = {
-    title: PropTypes.string.isRequired,
-};
+    title: PropTypes.string,
+}
 
-export default Header;
+export default Header

@@ -1,61 +1,50 @@
-import React, { Component } from 'react';
-import "./bootstrap.min.css";
+import React, { useEffect, useState } from 'react'
+import "./bootstrap.min.css"
+import Header from "./components/Header/Header"
+import ListAppointments from "./components/ListAppointments/ListAppointments"
+import NewAppointment from "./components/NewAppointment/NewAppointment"
 
-// components
-import Header from "./components/Header/Header";
-import ListAppointments from "./components/ListAppointments/ListAppointments";
-import NewAppointment from "./components/NewAppointment/NewAppointment";
+function App() {
+    const [appointments, setAppointments] = useState([])
 
-class App extends Component {
-    state = {
-        appointments: [],
-    };
-
-    componentDidMount() {
-        const appointments = localStorage.getItem("appointments");
-
+    useEffect(() => {
+        const appointments = localStorage.getItem("appointments")
         if (appointments) {
-            this.setState({ appointments: JSON.parse(appointments) });
+            setAppointments(JSON.parse(appointments))
         }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("appointments", JSON.stringify(appointments))
+    }, [appointments])
+
+    const onCreateAppointment = (appointment) => {
+        setAppointments((prevAppointments) => [...prevAppointments, appointment])
     }
 
-    componentDidUpdate() {
-        localStorage.setItem("appointments", JSON.stringify(this.state.appointments));
+    const onDeleteAppointment = (id) => {
+        const newAppointments = appointments.filter((appointment) => appointment.id !== id)
+        setAppointments(newAppointments)
     }
 
-    onCreateAppointment = (appointment) =>
-        this.setState({ appointments: [...this.state.appointments, appointment] });
-
-    onDeleteAppointment = (id) => {
-        const appointments = this.state.appointments.filter((appointment) => {
-            return appointment.id !== id;
-        });
-
-        this.setState({ appointments });
-    };
-
-    render() {
-        const { appointments } = this.state;
-
-        return (
-            <div className="container">
-                <Header title="Veterinary Patients Administrator" />
-                <div className="row">
-                    <div className="col-md-10 mx-auto">
-                        <NewAppointment onCreateAppointment={this.onCreateAppointment} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="mt-5 col-md-10 mx-auto">
-                        <ListAppointments
-                            appointments={appointments}
-                            onDeleteAppointment={this.onDeleteAppointment}
-                        />
-                    </div>
+    return (
+        <div className="container">
+            <Header title="Veterinary Patients Administrator" />
+            <div className="row">
+                <div className="col-md-10 mx-auto">
+                    <NewAppointment onCreateAppointment={onCreateAppointment} />
                 </div>
             </div>
-        );
-    }
+            <div className="row">
+                <div className="mt-5 col-md-10 mx-auto">
+                    <ListAppointments
+                        appointments={appointments}
+                        onDeleteAppointment={onDeleteAppointment}
+                    />
+                </div>
+            </div>
+        </div>
+    )
 }
 
-export default App;
+export default App
