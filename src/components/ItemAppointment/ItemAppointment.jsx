@@ -11,10 +11,10 @@ function ItemAppointment({ appointment, onDeleteAppointment }) {
                 <p className="card-text"><span>Time: </span>{appointment.time}</p>
                 <p className="card-text"><span>Symptoms: </span>{appointment.symptoms}</p>
                 <button
+                    type="button"
                     className="btn btn-danger"
                     data-toggle="modal"
                     data-target="#deleteModal"
-                    onClick={onDeleteAppointment}
                 >
                     Delete Appointment
                 </button>
@@ -28,18 +28,25 @@ function ItemAppointment({ appointment, onDeleteAppointment }) {
                 >
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Modal title</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times</span>
-                                </button>
-                            </div>
+                            <div className="modal-header" />
                             <div className="modal-body">
-                                <p>Modal body text goes here.</p>
+                                <p>Do you really want to delete this appointment?</p>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-primary">Delete</button>
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={onDeleteAppointment}
+                                >
+                                    Delete
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-dismiss="modal"
+                                >
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -97,7 +97,7 @@ function NewAppointment({ onCreateAppointment }) {
                                 rows="3"
                                 onChange={onChangeFieldHndlr}
                                 value={appointment.symptoms}
-                            ></textarea>
+                            />
                         </div>
                     </div>
                     <input

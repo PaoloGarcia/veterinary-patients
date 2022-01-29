@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import "./bootstrap.min.css"
 import Header from "./components/Header/Header"
 import ListAppointments from "./components/ListAppointments/ListAppointments"
 import NewAppointment from "./components/NewAppointment/NewAppointment"
