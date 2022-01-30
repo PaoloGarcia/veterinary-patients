@@ -1,8 +1,15 @@
-import PropTypes from "prop-types"
-import React from "react"
+import { IAppointmentStorage } from "../../types"
 import ItemAppointment from "../ItemAppointment/ItemAppointment"
 
-function ListAppointments({ appointments = [], onDeleteAppointment }) {
+interface ListAppointmentsProps {
+    appointments: IAppointmentStorage[]
+    onDeleteAppointment: (id: string) => void
+}
+
+function ListAppointments({
+    appointments,
+    onDeleteAppointment
+}: ListAppointmentsProps): JSX.Element {
     const title = appointments.length === 0 ? "No appointments yet" : "Appointments"
     const listAppointments = appointments.map((appointment) => (
         <ItemAppointment
@@ -11,7 +18,6 @@ function ListAppointments({ appointments = [], onDeleteAppointment }) {
             onDeleteAppointment={() => onDeleteAppointment(appointment.id)}
         />
     ))
-
     return (
         <div className="card mt-2 p-3">
             <div className="card-body">
@@ -20,11 +26,6 @@ function ListAppointments({ appointments = [], onDeleteAppointment }) {
             </div>
         </div>
     )
-}
-
-ListAppointments.propTypes = {
-    appointments: PropTypes.arrayOf(PropTypes.object),
-    onDeleteAppointment: PropTypes.func.isRequired,
 }
 
 export default ListAppointments

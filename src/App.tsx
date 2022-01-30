@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { IAppointmentStorage } from "./types"
 import Header from "./components/Header/Header"
 import ListAppointments from "./components/ListAppointments/ListAppointments"
 import NewAppointment from "./components/NewAppointment/NewAppointment"
 
 function App() {
-    const [appointments, setAppointments] = useState([])
+    const [appointments, setAppointments] = useState<IAppointmentStorage[]>([])
 
     useEffect(() => {
-        const appointments = localStorage.getItem("appointments")
-        if (appointments) {
-            setAppointments(JSON.parse(appointments))
-        }
+        const appointments: string = localStorage.getItem("appointments") ?? "[]"
+        setAppointments(JSON.parse(appointments))
     }, [])
 
     useEffect(() => {
         localStorage.setItem("appointments", JSON.stringify(appointments))
     }, [appointments])
 
-    const onCreateAppointment = (appointment) => {
+    const onCreateAppointment = (appointment: IAppointmentStorage): void => {
         setAppointments((prevAppointments) => [...prevAppointments, appointment])
     }
 
-    const onDeleteAppointment = (id) => {
+    const onDeleteAppointment = (id: string): void => {
         const newAppointments = appointments.filter((appointment) => appointment.id !== id)
         setAppointments(newAppointments)
     }

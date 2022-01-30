@@ -1,20 +1,24 @@
-import PropTypes from "prop-types"
-import React, { useState } from "react"
-import uuid from "uuid"
+import { ChangeEvent, FormEvent, useState } from "react"
+import { v4 as uuidv4 } from "uuid"
+import { IAppointment, IAppointmentStorage } from "../../types"
 import { initialState } from "./constants"
 
-function NewAppointment({ onCreateAppointment }) {
-    const [appointment, setAppointment] = useState(initialState.appointment)
-    const [error, setError] = useState(initialState.error)
+interface NewAppointmentProps {
+    onCreateAppointment: (appointment: IAppointmentStorage) => void
+}
 
-    const onChangeFieldHndlr = (e) => {
+function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Element {
+    const [appointment, setAppointment] = useState<IAppointment>(initialState.appointment)
+    const [error, setError] = useState<boolean>(initialState.error)
+
+    const onChangeField = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setAppointment({
             ...appointment,
             [e.target.name]: e.target.value
         })
     }
 
-    const onSubmitFormHndlr = (e) => {
+    const onSubmitFormHndlr = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const { pet, owner, date, time, symptoms } = appointment
         if (pet.trim() === "" || owner.trim() === "" || date.trim() === "" ||
@@ -22,8 +26,7 @@ function NewAppointment({ onCreateAppointment }) {
             setError(true)
             return
         }
-        const newAppointment = { ...appointment }
-        newAppointment.id = uuid()
+        const newAppointment = { id: uuidv4(), ...appointment }
         onCreateAppointment(newAppointment)
         // clear input fields
         setAppointment(initialState.appointment)
@@ -48,7 +51,7 @@ function NewAppointment({ onCreateAppointment }) {
                                 className="form-control"
                                 type="text"
                                 name="pet"
-                                onChange={onChangeFieldHndlr}
+                                onChange={onChangeField}
                                 value={appointment.pet}
                             />
                         </div>
@@ -60,7 +63,7 @@ function NewAppointment({ onCreateAppointment }) {
                                 className="form-control"
                                 type="text"
                                 name="owner"
-                                onChange={onChangeFieldHndlr}
+                                onChange={onChangeField}
                                 value={appointment.owner}
                             />
                         </div>
@@ -72,7 +75,7 @@ function NewAppointment({ onCreateAppointment }) {
                                 className="form-control"
                                 type="date"
                                 name="date"
-                                onChange={onChangeFieldHndlr}
+                                onChange={onChangeField}
                                 value={appointment.date}
                             />
                         </div>
@@ -82,7 +85,7 @@ function NewAppointment({ onCreateAppointment }) {
                                 className="form-control"
                                 type="time"
                                 name="time"
-                                onChange={onChangeFieldHndlr}
+                                onChange={onChangeField}
                                 value={appointment.time}
                             />
                         </div>
@@ -94,8 +97,8 @@ function NewAppointment({ onCreateAppointment }) {
                                 className="form-control"
                                 name="symptoms"
                                 placeholder="describe symptoms"
-                                rows="3"
-                                onChange={onChangeFieldHndlr}
+                                rows={3}
+                                onChange={onChangeField}
                                 value={appointment.symptoms}
                             />
                         </div>
@@ -109,10 +112,6 @@ function NewAppointment({ onCreateAppointment }) {
             </div>
         </div>
     )
-}
-
-NewAppointment.propTypes = {
-    onCreateAppointment: PropTypes.func.isRequired,
 }
 
 export default NewAppointment

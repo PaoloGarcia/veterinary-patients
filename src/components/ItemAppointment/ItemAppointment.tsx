@@ -1,15 +1,23 @@
-import PropTypes from "prop-types"
-import React from "react"
+import { IAppointment } from "../../types"
 
-function ItemAppointment({ appointment, onDeleteAppointment }) {
+interface ItemAppointmentProps {
+    appointment: IAppointment
+    onDeleteAppointment: () => void
+}
+
+function ItemAppointment({
+    appointment,
+    onDeleteAppointment
+}: ItemAppointmentProps): JSX.Element {
+    const { pet, owner, date, time, symptoms } = appointment
     return (
         <div className="media mt-3">
             <div className="media-body">
-                <h4 className="mt-0">{appointment.pet}</h4>
-                <p className="card-text"><span>Pet Owner: </span>{appointment.owner}</p>
-                <p className="card-text"><span>Date: </span>{appointment.date}</p>
-                <p className="card-text"><span>Time: </span>{appointment.time}</p>
-                <p className="card-text"><span>Symptoms: </span>{appointment.symptoms}</p>
+                <h4 className="mt-0">{pet}</h4>
+                <p className="card-text"><span>Pet Owner: </span>{owner}</p>
+                <p className="card-text"><span>Date: </span>{date}</p>
+                <p className="card-text"><span>Time: </span>{time}</p>
+                <p className="card-text"><span>Symptoms: </span>{symptoms}</p>
                 <button
                     type="button"
                     className="btn btn-danger"
@@ -21,7 +29,7 @@ function ItemAppointment({ appointment, onDeleteAppointment }) {
                 <div
                     className="modal"
                     id="deleteModal"
-                    tabIndex="-1"
+                    tabIndex={1}
                     role="dialog"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
@@ -54,11 +62,6 @@ function ItemAppointment({ appointment, onDeleteAppointment }) {
             </div>
         </div>
     )
-}
-
-ItemAppointment.propTypes = {
-    appointment: PropTypes.objectOf(PropTypes.string).isRequired,
-    onDeleteAppointment: PropTypes.func.isRequired,
 }
 
 export default ItemAppointment
