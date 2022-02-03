@@ -1,7 +1,7 @@
 import { IAppointmentStorage } from "../../types"
 import ItemAppointment from "../ItemAppointment/ItemAppointment"
 
-interface ListAppointmentsProps {
+type ListAppointmentsProps = {
     appointments: IAppointmentStorage[]
     onDeleteAppointment: (id: string) => void
 }

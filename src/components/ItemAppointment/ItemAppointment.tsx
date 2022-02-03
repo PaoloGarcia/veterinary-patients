@@ -1,6 +1,6 @@
 import { IAppointment } from "../../types"
 
-interface ItemAppointmentProps {
+type ItemAppointmentProps = {
     appointment: IAppointment
     onDeleteAppointment: () => void
 }

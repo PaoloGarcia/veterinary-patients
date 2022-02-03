@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid"
 import { IAppointment, IAppointmentStorage } from "../../types"
 import { initialState } from "./constants"
 
-interface NewAppointmentProps {
+type NewAppointmentProps = {
     onCreateAppointment: (appointment: IAppointmentStorage) => void
 }
 
