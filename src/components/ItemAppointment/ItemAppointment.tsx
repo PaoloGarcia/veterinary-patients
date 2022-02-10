@@ -1,7 +1,7 @@
-import { IAppointment } from "../../types"
+import { TAppointment } from "../../types"
 
 type ItemAppointmentProps = {
-    appointment: IAppointment
+    appointment: TAppointment
     onDeleteAppointment: () => void
 }
 

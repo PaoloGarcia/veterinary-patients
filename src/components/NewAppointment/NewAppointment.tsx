@@ -1,14 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { IAppointment, IAppointmentStorage } from "../../types"
+import { TAppointment } from "../../types"
+import { someAreEmpty } from "./helpers"
 import { initialState } from "./constants"
 
 type NewAppointmentProps = {
-    onCreateAppointment: (appointment: IAppointmentStorage) => void
+    onCreateAppointment: (appointment: TAppointment) => void
 }
 
 function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Element {
-    const [appointment, setAppointment] = useState<IAppointment>(initialState.appointment)
+    const [appointment, setAppointment] = useState<TAppointment>(initialState.appointment)
     const [error, setError] = useState<boolean>(initialState.error)
 
     const onChangeField = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -21,12 +22,12 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
     const onSubmitFormHndlr = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         const { pet, owner, date, time, symptoms } = appointment
-        if (pet.trim() === "" || owner.trim() === "" || date.trim() === "" ||
-            time.trim() === "" || symptoms.trim() === "") {
+        if (someAreEmpty(pet, owner, date, time, symptoms)) {
             setError(true)
             return
         }
-        const newAppointment = { id: uuidv4(), ...appointment }
+        const newAppointment = { ...appointment }
+        newAppointment.id = uuidv4()
         onCreateAppointment(newAppointment)
         // clear input fields
         setAppointment(initialState.appointment)

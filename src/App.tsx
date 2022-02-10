@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { IAppointmentStorage } from "./types"
+import { TAppointment } from "./types"
 import Header from "./components/Header/Header"
 import ListAppointments from "./components/ListAppointments/ListAppointments"
 import NewAppointment from "./components/NewAppointment/NewAppointment"
 
 function App() {
-    const [appointments, setAppointments] = useState<IAppointmentStorage[]>([])
+    const [appointments, setAppointments] = useState<TAppointment[]>([])
 
     useEffect(() => {
         const appointments: string = localStorage.getItem("appointments") ?? "[]"
@@ -16,7 +16,7 @@ function App() {
         localStorage.setItem("appointments", JSON.stringify(appointments))
     }, [appointments])
 
-    const onCreateAppointment = (appointment: IAppointmentStorage): void => {
+    const onCreateAppointment = (appointment: TAppointment): void => {
         setAppointments((prevAppointments) => [...prevAppointments, appointment])
     }
 

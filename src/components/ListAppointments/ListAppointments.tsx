@@ -1,8 +1,8 @@
-import { IAppointmentStorage } from "../../types"
+import { TAppointment } from "../../types"
 import ItemAppointment from "../ItemAppointment/ItemAppointment"
 
 type ListAppointmentsProps = {
-    appointments: IAppointmentStorage[]
+    appointments: TAppointment[]
     onDeleteAppointment: (id: string) => void
 }
 
@@ -15,7 +15,7 @@ function ListAppointments({
         <ItemAppointment
             key={appointment.id}
             appointment={appointment}
-            onDeleteAppointment={() => onDeleteAppointment(appointment.id)}
+            onDeleteAppointment={() => onDeleteAppointment(appointment.id ?? "")}
         />
     ))
     return (
