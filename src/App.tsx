@@ -21,7 +21,9 @@ function App(): JSX.Element {
     }
 
     const onDeleteAppointment = (id: string): void => {
-        const newAppointments = appointments.filter((appointment) => appointment.id !== id)
+        const newAppointments = appointments.filter(
+            (appointment) => appointment.id !== id
+        )
         setAppointments(newAppointments)
     }
 
