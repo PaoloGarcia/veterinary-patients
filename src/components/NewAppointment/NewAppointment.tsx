@@ -9,10 +9,14 @@ type NewAppointmentProps = {
 }
 
 function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Element {
-    const [appointment, setAppointment] = useState<TAppointment>(initialState.appointment)
+    const [appointment, setAppointment] = useState<TAppointment>(
+        initialState.appointment
+    )
     const [error, setError] = useState<boolean>(initialState.error)
 
-    const onChangeField = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const onChangeField = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ): void => {
         setAppointment({
             ...appointment,
             [e.target.name]: e.target.value
@@ -41,12 +45,18 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                     Fill up the fields to schedule a new appointment
                 </h5>
                 {error
-                    ? <div className="aler alert-danger mb-3 p-2 text-center">All fields are required</div>
+                    ? (
+                        <div className="aler alert-danger mb-3 p-2 text-center">
+                            All fields are required
+                        </div>
+                    )
                     : null
                 }
                 <form onSubmit={onSubmitFormHndlr}>
                     <div className="form-group row">
-                        <label className="col-form-label col-sm-4 col-lg-2">Pet Name</label>
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                            Pet Name
+                        </label>
                         <div className="col-sm-8 col-lg-10">
                             <input
                                 className="form-control"
@@ -58,7 +68,9 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label className="col-form-label col-sm-4 col-lg-2">Pet Owner Name</label>
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                            Pet Owner Name
+                        </label>
                         <div className="col-sm-8 col-lg-10">
                             <input
                                 className="form-control"
@@ -70,7 +82,9 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label className="col-form-label col-sm-4 col-lg-2">Date</label>
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                            Date
+                        </label>
                         <div className="col-sm-8 col-lg-4 mb-2">
                             <input
                                 className="form-control"
@@ -80,7 +94,9 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                                 value={appointment.date}
                             />
                         </div>
-                        <label className="col-form-label col-sm-4 col-lg-2">Time</label>
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                            Time
+                        </label>
                         <div className="col-sm-8 col-lg-4">
                             <input
                                 className="form-control"
@@ -92,7 +108,9 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label className="col-form-label col-sm-4 col-lg-2">Symptoms</label>
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                            Symptoms
+                        </label>
                         <div className="col-sm-8 col-lg-10">
                             <textarea
                                 className="form-control"

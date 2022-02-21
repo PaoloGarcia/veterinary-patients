@@ -4,7 +4,7 @@ import Header from "./components/Header/Header"
 import ListAppointments from "./components/ListAppointments/ListAppointments"
 import NewAppointment from "./components/NewAppointment/NewAppointment"
 
-function App() {
+function App(): JSX.Element {
     const [appointments, setAppointments] = useState<TAppointment[]>([])
 
     useEffect(() => {

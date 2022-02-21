@@ -5,7 +5,9 @@ type HeaderProps = {
 function Header({ title = "" }: HeaderProps): JSX.Element {
     return (
         <header>
-            <h1 className="text-center">{title}</h1>
+            <h1 className="text-center">
+                {title}
+            </h1>
         </header>
     )
 }

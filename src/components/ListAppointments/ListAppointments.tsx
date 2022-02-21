@@ -11,7 +11,7 @@ function ListAppointments({
     onDeleteAppointment
 }: ListAppointmentsProps): JSX.Element {
     const title = appointments.length === 0 ? "No appointments yet" : "Appointments"
-    const listAppointments = appointments.map((appointment) => (
+    const listAppointments: JSX.Element[] = appointments.map((appointment) => (
         <ItemAppointment
             key={appointment.id}
             appointment={appointment}

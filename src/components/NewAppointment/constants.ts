@@ -4,7 +4,7 @@ export const initialState = {
         owner: "",
         date: "",
         time: "",
-        symptoms: "",
+        symptoms: ""
     },
-    error: false,
+    error: false
 }
