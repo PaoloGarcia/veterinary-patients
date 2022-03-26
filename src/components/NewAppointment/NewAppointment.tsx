@@ -1,18 +1,18 @@
-import { ChangeEvent, FormEvent, useState } from "react"
-import { v4 as uuidv4 } from "uuid"
-import { TAppointment } from "../../types"
-import { someAreEmpty } from "./helpers"
-import { initialState } from "./constants"
+import { ChangeEvent, FormEvent, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { TAppointment } from "../../types";
+import { someAreEmpty } from "./helpers";
+import { initialState } from "./constants";
 
 type NewAppointmentProps = {
-    onCreateAppointment: (appointment: TAppointment) => void
-}
+    onCreateAppointment: (appointment: TAppointment) => void;
+};
 
 function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Element {
     const [appointment, setAppointment] = useState<TAppointment>(
         initialState.appointment
-    )
-    const [error, setError] = useState<boolean>(initialState.error)
+    );
+    const [error, setError] = useState<boolean>(initialState.error);
 
     const onChangeField = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,23 +20,25 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
         setAppointment({
             ...appointment,
             [e.target.name]: e.target.value
-        })
-    }
+        });
+    };
 
     const onSubmitFormHndlr = (e: FormEvent<HTMLFormElement>): void => {
-        e.preventDefault()
-        const { pet, owner, date, time, symptoms } = appointment
+        e.preventDefault();
+        const { pet, owner, date, time, symptoms } = appointment;
+
         if (someAreEmpty(pet, owner, date, time, symptoms)) {
-            setError(true)
-            return
+            setError(true);
+            return;
         }
-        const newAppointment = { ...appointment }
-        newAppointment.id = uuidv4()
-        onCreateAppointment(newAppointment)
+
+        const newAppointment = { ...appointment };
+        newAppointment.id = uuidv4();
+        onCreateAppointment(newAppointment);
         // clear input fields
-        setAppointment(initialState.appointment)
-        setError(initialState.error)
-    }
+        setAppointment(initialState.appointment);
+        setError(initialState.error);
+    };
 
     return (
         <div className="card mt-5 p-3">
@@ -130,7 +132,7 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default NewAppointment
+export default NewAppointment;

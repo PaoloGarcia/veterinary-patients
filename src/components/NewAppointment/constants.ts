@@ -7,4 +7,4 @@ export const initialState = {
         symptoms: ""
     },
     error: false
-}
+};

@@ -1,15 +1,16 @@
-import { TAppointment } from "../../types"
+import { TAppointment } from "../../types";
 
 type ItemAppointmentProps = {
-    appointment: TAppointment
-    onDeleteAppointment: () => void
-}
+    appointment: TAppointment;
+    onDeleteAppointment: () => void;
+};
 
 function ItemAppointment({
     appointment,
     onDeleteAppointment
 }: ItemAppointmentProps): JSX.Element {
-    const { pet, owner, date, time, symptoms } = appointment
+    const { pet, owner, date, time, symptoms } = appointment;
+
     return (
         <div className="media mt-3">
             <div className="media-body">
@@ -61,7 +62,7 @@ function ItemAppointment({
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default ItemAppointment
+export default ItemAppointment;
