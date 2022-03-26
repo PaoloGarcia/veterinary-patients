@@ -1,31 +1,31 @@
-import { useEffect, useState } from 'react'
-import { TAppointment } from "./types"
-import Header from "./components/Header/Header"
-import ListAppointments from "./components/ListAppointments/ListAppointments"
-import NewAppointment from "./components/NewAppointment/NewAppointment"
+import { useEffect, useState } from 'react';
+import { TAppointment } from "./types";
+import Header from "./components/Header/Header";
+import ListAppointments from "./components/ListAppointments/ListAppointments";
+import NewAppointment from "./components/NewAppointment/NewAppointment";
 
 function App(): JSX.Element {
-    const [appointments, setAppointments] = useState<TAppointment[]>([])
+    const [appointments, setAppointments] = useState<TAppointment[]>([]);
 
     useEffect(() => {
-        const appointments: string = localStorage.getItem("appointments") ?? "[]"
-        setAppointments(JSON.parse(appointments))
-    }, [])
+        const appointments: string = localStorage.getItem("appointments") ?? "[]";
+        setAppointments(JSON.parse(appointments));
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem("appointments", JSON.stringify(appointments))
-    }, [appointments])
+        localStorage.setItem("appointments", JSON.stringify(appointments));
+    }, [appointments]);
 
     const onCreateAppointment = (appointment: TAppointment): void => {
-        setAppointments((prevAppointments) => [...prevAppointments, appointment])
-    }
+        setAppointments((prevAppointments) => [...prevAppointments, appointment]);
+    };
 
     const onDeleteAppointment = (id: string): void => {
         const newAppointments = appointments.filter(
             (appointment) => appointment.id !== id
-        )
-        setAppointments(newAppointments)
-    }
+        );
+        setAppointments(newAppointments);
+    };
 
     return (
         <div className="container">
@@ -44,7 +44,7 @@ function App(): JSX.Element {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;

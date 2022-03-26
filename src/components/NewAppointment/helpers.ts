@@ -1,3 +1,6 @@
 export function someAreEmpty(...fields: string[]): boolean {
-    return fields.some((field) => field.trim() === "")
+    if (fields.length === 0) {
+        return true;
+    }
+    return fields.some((field) => field.trim() === "");
 }

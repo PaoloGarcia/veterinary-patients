@@ -1,6 +1,6 @@
 type HeaderProps = {
-    title?: string
-}
+    title?: string;
+};
 
 function Header({ title = "" }: HeaderProps): JSX.Element {
     return (
@@ -9,7 +9,7 @@ function Header({ title = "" }: HeaderProps): JSX.Element {
                 {title}
             </h1>
         </header>
-    )
+    );
 }
 
-export default Header
+export default Header;
