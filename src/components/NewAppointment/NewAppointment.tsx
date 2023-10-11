@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { TAppointment } from "../../types";
+import type { TAppointment, TAppointmentDraft } from "../../types";
 import { someAreEmpty } from "./helpers";
 import { initialState } from "./constants";
 
@@ -9,7 +9,7 @@ type NewAppointmentProps = {
 };
 
 function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Element {
-   const [appointment, setAppointment] = useState<TAppointment>(
+   const [appointment, setAppointment] = useState<TAppointmentDraft>(
       initialState.appointment
    );
    const [error, setError] = useState<boolean>(initialState.error);
@@ -23,7 +23,7 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
       });
    };
 
-   const onSubmitFormHndlr = (e: FormEvent<HTMLFormElement>): void => {
+   const onSubmitForm = (e: FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
       const { pet, owner, date, time, symptoms } = appointment;
 
@@ -33,8 +33,7 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
       }
 
       const newAppointment = { ...appointment };
-      newAppointment.id = uuidv4();
-      onCreateAppointment(newAppointment);
+      onCreateAppointment({ ...newAppointment, id: uuidv4() });
       // clear input fields
       setAppointment(initialState.appointment);
       setError(initialState.error);
@@ -55,7 +54,7 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                   )
                   : null
             }
-            <form onSubmit={onSubmitFormHndlr}>
+            <form onSubmit={onSubmitForm}>
                <div className="form-group row">
                   <label className="col-form-label col-sm-4 col-lg-2">
                      Pet Name
