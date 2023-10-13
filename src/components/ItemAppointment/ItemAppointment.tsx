@@ -1,20 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { TAppointment, TAppointmentDraft } from "../../types";
+import { TAppointment, TAppointmentDraft, TDraftAppointment } from "../../types";
 import { initialState } from "../NewAppointment/constants";
+import { someAreEmpty } from "../NewAppointment/helpers";
 
 type ItemAppointmentProps = {
    appointment: TAppointment;
+   onUpdateAppointments: (props: TDraftAppointment) => void;
    onDeleteAppointment: () => void;
 };
 
 function ItemAppointment({
    appointment,
+   onUpdateAppointments,
    onDeleteAppointment
 }: ItemAppointmentProps): JSX.Element {
    const [isEditMode, setIsEditMode] = useState(false);
-   const [appt, setAppointment] = useState<TAppointmentDraft>(
-      initialState.appointment
-   );
+   const [appt, setAppointment] = useState<TAppointmentDraft>(initialState.appointment);
+   const [error, setError] = useState<boolean>(initialState.error);
    const { pet, owner, date, time, symptoms } = appointment;
 
    const onChangeField = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -24,20 +26,16 @@ function ItemAppointment({
       });
    };
 
-   const onSubmitForm = (e: FormEvent<HTMLFormElement>): void => {
+   const onSubmitEdit = (e: FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
-      // const { pet, owner, date, time, symptoms } = appointment;
-
-      // if (someAreEmpty(pet, owner, date, time, symptoms)) {
-      //    setError(true);
-      //    return;
-      // }
-
-      // const newAppointment = { ...appointment };
-      // onCreateAppointment({ ...newAppointment, id: uuidv4() });
-      // // clear input fields
-      // setAppointment(initialState.appointment);
-      // setError(initialState.error);
+      const { pet, owner, date, time, symptoms } = appt;
+      if (someAreEmpty(pet, owner, date, time, symptoms)) {
+         setError(true);
+         return;
+      }
+      onUpdateAppointments(appt);
+      setError(initialState.error);
+      setIsEditMode(false);
    };
 
    const onCancelEditing = (): void => {
@@ -53,7 +51,7 @@ function ItemAppointment({
    };
 
    return (
-      <div className="media mt-3">
+      <div className="media mt-3" data-testid="appointment">
          <div className="media-body">
             {!isEditMode ? (
                <div>
@@ -64,86 +62,97 @@ function ItemAppointment({
                   <p className="card-text"><span>Symptoms: </span>{symptoms}</p>
                </div>
             ) : (
-               <form onSubmit={onSubmitForm}>
-                  <div className="form-group row">
-                     <label className="col-form-label col-sm-4 col-lg-2">
-                        Pet Name
-                     </label>
-                     <div className="col-sm-8 col-lg-10">
-                        <input
-                           className="form-control"
-                           type="text"
-                           name="pet"
-                           onChange={onChangeField}
-                           value={appt.pet}
-                        />
+               <>
+                  {
+                     error
+                        ? (
+                           <div className="aler alert-danger mb-3 p-2 text-center">
+                              All fields are required
+                           </div>
+                        )
+                        : null
+                  }
+                  <form onSubmit={onSubmitEdit}>
+                     <div className="form-group row">
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                           Pet Name
+                        </label>
+                        <div className="col-sm-8 col-lg-10">
+                           <input
+                              className="form-control"
+                              type="text"
+                              name="pet"
+                              onChange={onChangeField}
+                              value={appt.pet}
+                           />
+                        </div>
                      </div>
-                  </div>
-                  <div className="form-group row">
-                     <label className="col-form-label col-sm-4 col-lg-2">
-                        Pet Owner Name
-                     </label>
-                     <div className="col-sm-8 col-lg-10">
-                        <input
-                           className="form-control"
-                           type="text"
-                           name="owner"
-                           onChange={onChangeField}
-                           value={appt.owner}
-                        />
+                     <div className="form-group row">
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                           Pet Owner Name
+                        </label>
+                        <div className="col-sm-8 col-lg-10">
+                           <input
+                              className="form-control"
+                              type="text"
+                              name="owner"
+                              onChange={onChangeField}
+                              value={appt.owner}
+                           />
+                        </div>
                      </div>
-                  </div>
-                  <div className="form-group row">
-                     <label className="col-form-label col-sm-4 col-lg-2">
-                        Date
-                     </label>
-                     <div className="col-sm-8 col-lg-4 mb-2">
-                        <input
-                           className="form-control"
-                           type="date"
-                           name="date"
-                           onChange={onChangeField}
-                           value={appt.date}
-                        />
+                     <div className="form-group row">
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                           Date
+                        </label>
+                        <div className="col-sm-8 col-lg-4 mb-2">
+                           <input
+                              className="form-control"
+                              type="date"
+                              name="date"
+                              onChange={onChangeField}
+                              value={appt.date}
+                           />
+                        </div>
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                           Time
+                        </label>
+                        <div className="col-sm-8 col-lg-4">
+                           <input
+                              className="form-control"
+                              type="time"
+                              name="time"
+                              onChange={onChangeField}
+                              value={appt.time}
+                           />
+                        </div>
                      </div>
-                     <label className="col-form-label col-sm-4 col-lg-2">
-                        Time
-                     </label>
-                     <div className="col-sm-8 col-lg-4">
-                        <input
-                           className="form-control"
-                           type="time"
-                           name="time"
-                           onChange={onChangeField}
-                           value={appt.time}
-                        />
+                     <div className="form-group row">
+                        <label className="col-form-label col-sm-4 col-lg-2">
+                           Symptoms
+                        </label>
+                        <div className="col-sm-8 col-lg-10">
+                           <textarea
+                              className="form-control"
+                              name="symptoms"
+                              placeholder="describe symptoms"
+                              rows={3}
+                              onChange={onChangeField}
+                              value={appt.symptoms}
+                           />
+                        </div>
                      </div>
-                  </div>
-                  <div className="form-group row">
-                     <label className="col-form-label col-sm-4 col-lg-2">
-                        Symptoms
-                     </label>
-                     <div className="col-sm-8 col-lg-10">
-                        <textarea
-                           className="form-control"
-                           name="symptoms"
-                           placeholder="describe symptoms"
-                           rows={3}
-                           onChange={onChangeField}
-                           value={appt.symptoms}
-                        />
-                     </div>
-                  </div>
-                  <input
-                     className="btn btn-success mt-1"
-                     type="submit"
-                     value="Save Changes"
-                  />
-               </form>
+                     <input
+                        className="btn btn-success mt-1"
+                        type="submit"
+                        value="Save Changes"
+                     />
+                  </form>
+               </>
             )}
             <button
                type="button"
-               className="btn btn-danger ml-3"
+               className="btn btn-danger mr-3"
                data-toggle="modal"
                data-target="#deleteModal"
             >
@@ -152,7 +161,7 @@ function ItemAppointment({
             {!isEditMode ? (
                <button
                   type="button"
-                  className="btn btn-warning ml-3"
+                  className="btn btn-warning mr-3"
                   onClick={onStartEditing}
                >
                   Edit Appointment
@@ -161,7 +170,7 @@ function ItemAppointment({
             {isEditMode ? (
                <button
                   type="button"
-                  className="btn btn-secondary ml-3"
+                  className="btn btn-secondary mr-3"
                   onClick={onCancelEditing}
                >
                   Cancel
@@ -185,6 +194,7 @@ function ItemAppointment({
                         <button
                            type="button"
                            className="btn btn-primary"
+                           data-dismiss="modal"
                            onClick={onDeleteAppointment}
                         >
                            Delete

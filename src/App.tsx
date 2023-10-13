@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TAppointment } from "./types";
+import { TAppointment, TDraftAppointment } from "./types";
 import Header from "./components/Header/Header";
 import ListAppointments from "./components/ListAppointments/ListAppointments";
 import NewAppointment from "./components/NewAppointment/NewAppointment";
@@ -18,6 +18,14 @@ function App(): JSX.Element {
 
    const onCreateAppointment = (appointment: TAppointment): void => {
       setAppointments((prevAppointments) => [...prevAppointments, appointment]);
+   };
+
+   const onUpdateAppointments = (appointmentId: string, props: TDraftAppointment): void => {
+      setAppointments(
+         (prevAppointments) => prevAppointments.map(
+            (appt) => appt.id === appointmentId ? { ...appt, ...props } : appt
+         )
+      );
    };
 
    const onDeleteAppointment = (id: string): void => {
@@ -39,6 +47,7 @@ function App(): JSX.Element {
             <div className="mt-5 col-md-10 mx-auto">
                <ListAppointments
                   appointments={appointments}
+                  onUpdateAppointments={onUpdateAppointments}
                   onDeleteAppointment={onDeleteAppointment}
                />
             </div>

@@ -1,13 +1,15 @@
-import { TAppointment } from "../../types";
+import { TAppointment, TDraftAppointment } from "../../types";
 import ItemAppointment from "../ItemAppointment/ItemAppointment";
 
 export type ListAppointmentsProps = {
    appointments: TAppointment[];
+   onUpdateAppointments: (id: string, props: TDraftAppointment) => void;
    onDeleteAppointment: (id: string) => void;
 };
 
 function ListAppointments({
    appointments,
+   onUpdateAppointments,
    onDeleteAppointment
 }: ListAppointmentsProps) {
    return (
@@ -22,7 +24,8 @@ function ListAppointments({
                      <ItemAppointment
                         key={appointment.id}
                         appointment={appointment}
-                        onDeleteAppointment={() => onDeleteAppointment(appointment.id ?? "")}
+                        onUpdateAppointments={(props: TDraftAppointment) => onUpdateAppointments(appointment.id, props)}
+                        onDeleteAppointment={() => onDeleteAppointment(appointment.id)}
                      />
                   ))
                }
