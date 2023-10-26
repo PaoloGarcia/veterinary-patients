@@ -19,9 +19,13 @@ header h1 {
   color: white;
 }
 
+.list-appointmets {
+  list-style: none;
+  padding: 0;
+}
+
 .list-appointmets .media {
   border-bottom: 1px solid #e1e1e1;
-  padding-bottom: 3rem;
 }
 
 .list-appointmets .media:last-of-type{

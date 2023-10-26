@@ -44,7 +44,7 @@ function App(): JSX.Element {
             </div>
          </div>
          <div className="row">
-            <div className="mt-5 col-md-10 mx-auto">
+            <div className="mt-5 col-md-8 mx-auto">
                <ListAppointments
                   appointments={appointments}
                   onUpdateAppointments={onUpdateAppointments}

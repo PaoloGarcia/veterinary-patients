@@ -51,7 +51,7 @@ function ItemAppointment({
    };
 
    return (
-      <li className="media mt-3" data-testid="appointment">
+      <li className="media mt-4" data-testid="appointment">
          <div className="media-body">
             {!isEditMode ? (
                <div>
@@ -128,11 +128,12 @@ function ItemAppointment({
                         </div>
                      </div>
                      <div className="form-group row">
-                        <label className="col-form-label col-sm-4 col-lg-2">
+                        <label htmlFor="symptoms" className="col-form-label col-sm-4 col-lg-2">
                            Symptoms
                         </label>
                         <div className="col-sm-8 col-lg-10">
                            <textarea
+                              id="syptoms"
                               className="form-control"
                               name="symptoms"
                               placeholder="describe symptoms"
