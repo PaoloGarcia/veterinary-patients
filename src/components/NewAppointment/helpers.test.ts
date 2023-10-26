@@ -1,4 +1,4 @@
-import { someAreEmpty } from "../helpers";
+import { someAreEmpty } from "./helpers";
 
 describe("Tests for someAreEmpty function", function () {
    it("should return false if one or more non empty strings are passed in", () => {

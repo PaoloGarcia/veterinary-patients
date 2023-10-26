@@ -1,44 +1,47 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import ListAppointments, { ListAppointmentsProps } from "./ListAppointments";
 import { TAppointment } from "../../types";
+import { describe, expect, it, vi } from "vitest";
 
 function createProps(additionalProps?: object): ListAppointmentsProps {
     return {
         appointments: [],
-        onUpdateAppointments: jest.fn(),
-        onDeleteAppointment: jest.fn(),
+        onUpdateAppointments: vi.fn(),
+        onDeleteAppointment: vi.fn(),
         ...additionalProps
     }
 }
 
+const appointments: TAppointment[] = [
+    {
+        id: "1",
+        pet: "firulais",
+        owner: "Paolo",
+        date: new Date().toDateString(),
+        time: "33:33",
+        symptoms: "headache"
+    },
+    {
+        id: "2",
+        pet: "cachito",
+        owner: "Paulina",
+        date: new Date().toDateString(),
+        time: "11:33",
+        symptoms: "vomit"
+    }
+];
+
 describe("Tests for ListAppointment", () => {
-    it("Should render component correctly", () => {
+    it("renders component correctly", () => {
         render(<ListAppointments {...createProps()} />);
         const title = screen.getByRole("heading", { name: /no appointments yet/i });
         expect(title).toBeInTheDocument;
     });
 
     it("renders 2 appointments", () => {
-        const appointments: TAppointment[] = [
-            {
-                id: "1",
-                name: "firulais",
-                owner: "Paolo",
-                date: new Date().toDateString(),
-                time: "33:33",
-                symptoms: "headache"
-            },
-            {
-                id: "2",
-                name: "cachito",
-                owner: "Paulina",
-                date: new Date().toDateString(),
-                time: "11:33",
-                symptoms: "vomit"
-            }
-        ];
-        render(<ListAppointments {...createProps()} appointments={appointments} />);
-        const appts = screen.getByRole("list");
+        render(<ListAppointments {...createProps({ appointments })} />);
+        const list = screen.getByRole("list");
+        const appts = within(list).getAllByRole("listitem");
         expect(appts).toHaveLength(2);
     });
 });

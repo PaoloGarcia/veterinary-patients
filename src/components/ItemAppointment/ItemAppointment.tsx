@@ -51,7 +51,7 @@ function ItemAppointment({
    };
 
    return (
-      <div className="media mt-3" data-testid="appointment">
+      <li className="media mt-3" data-testid="appointment">
          <div className="media-body">
             {!isEditMode ? (
                <div>
@@ -211,7 +211,7 @@ function ItemAppointment({
                </div>
             </div>
          </div>
-      </div>
+      </li>
    );
 }
 

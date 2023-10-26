@@ -19,24 +19,24 @@ header h1 {
   color: white;
 }
 
-.lista-citas .media {
+.list-appointmets .media {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 3rem;
 }
 
-.lista-citas .media:last-of-type{
+.list-appointmets .media:last-of-type{
   border-bottom: 0;
 }
 
-.lista-citas .media-body p {
+.list-appointmets .media-body p {
   margin:0;
 }
 
-.lista-citas .media-body button {
+.list-appointmets .media-body button {
   margin-top: 1rem!important;
 }
 
-.lista-citas .media-body span {
+.list-appointmets .media-body span {
   color: #333;
   font-weight: bold;
 }

@@ -48,19 +48,20 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
             {
                error
                   ? (
-                     <div className="aler alert-danger mb-3 p-2 text-center">
+                     <p className="aler alert-danger mb-3 p-2 text-center">
                         All fields are required
-                     </div>
+                     </p>
                   )
                   : null
             }
             <form onSubmit={onSubmitForm}>
                <div className="form-group row">
-                  <label className="col-form-label col-sm-4 col-lg-2">
+                  <label htmlFor="pet" className="col-form-label col-sm-4 col-lg-2">
                      Pet Name
                   </label>
                   <div className="col-sm-8 col-lg-10">
                      <input
+                        id="pet"
                         className="form-control"
                         type="text"
                         name="pet"
@@ -70,11 +71,12 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                   </div>
                </div>
                <div className="form-group row">
-                  <label className="col-form-label col-sm-4 col-lg-2">
+                  <label htmlFor="owner" className="col-form-label col-sm-4 col-lg-2">
                      Pet Owner Name
                   </label>
                   <div className="col-sm-8 col-lg-10">
                      <input
+                        id="owner"
                         className="form-control"
                         type="text"
                         name="owner"
@@ -84,11 +86,12 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                   </div>
                </div>
                <div className="form-group row">
-                  <label className="col-form-label col-sm-4 col-lg-2">
+                  <label htmlFor="date" className="col-form-label col-sm-4 col-lg-2">
                      Date
                   </label>
                   <div className="col-sm-8 col-lg-4 mb-2">
                      <input
+                        id="date"
                         className="form-control"
                         type="date"
                         name="date"
@@ -96,11 +99,12 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                         value={appointment.date}
                      />
                   </div>
-                  <label className="col-form-label col-sm-4 col-lg-2">
+                  <label htmlFor="time" className="col-form-label col-sm-4 col-lg-2">
                      Time
                   </label>
                   <div className="col-sm-8 col-lg-4">
                      <input
+                        id="time"
                         className="form-control"
                         type="time"
                         name="time"
@@ -110,11 +114,12 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
                   </div>
                </div>
                <div className="form-group row">
-                  <label className="col-form-label col-sm-4 col-lg-2">
+                  <label htmlFor="symptoms" className="col-form-label col-sm-4 col-lg-2">
                      Symptoms
                   </label>
                   <div className="col-sm-8 col-lg-10">
                      <textarea
+                        id="symptoms"
                         className="form-control"
                         name="symptoms"
                         placeholder="describe symptoms"
