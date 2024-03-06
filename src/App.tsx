@@ -21,17 +21,13 @@ function App(): JSX.Element {
    };
 
    const onUpdateAppointments = (appointmentId: string, props: TDraftAppointment): void => {
-      setAppointments(
-         (prevAppointments) => prevAppointments.map(
-            (appt) => appt.id === appointmentId ? { ...appt, ...props } : appt
-         )
-      );
+      setAppointments((prevAppointments) => prevAppointments.map(
+         (appt) => appt.id === appointmentId ? { ...appt, ...props } : appt
+      ));
    };
 
    const onDeleteAppointment = (id: string): void => {
-      const newAppointments = appointments.filter(
-         (appointment) => appointment.id !== id
-      );
+      const newAppointments = appointments.filter((appt) => appt.id !== id);
       setAppointments(newAppointments);
    };
 

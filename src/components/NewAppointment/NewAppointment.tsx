@@ -15,16 +15,13 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
    const [error, setError] = useState<boolean>(initialState.error);
 
    const onChangeField = (
-      e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
    ): void => {
-      setAppointment({
-         ...appointment,
-         [e.target.name]: e.target.value
-      });
+      setAppointment({ ...appointment, [event.target.name]: event.target.value });
    };
 
-   const onSubmitForm = (e: FormEvent<HTMLFormElement>): void => {
-      e.preventDefault();
+   const onSubmitForm = (event: FormEvent<HTMLFormElement>): void => {
+      event.preventDefault();
       const { pet, owner, date, time, symptoms } = appointment;
 
       if (someAreEmpty(pet, owner, date, time, symptoms)) {
@@ -45,15 +42,11 @@ function NewAppointment({ onCreateAppointment }: NewAppointmentProps): JSX.Eleme
             <h5 className="card-title text-center mb-3">
                Fill up the fields to schedule a new appointment
             </h5>
-            {
-               error
-                  ? (
-                     <p className="aler alert-danger mb-3 p-2 text-center">
-                        All fields are required
-                     </p>
-                  )
-                  : null
-            }
+            {error ? (
+               <p className="aler alert-danger mb-3 p-2 text-center">
+                  All fields are required
+               </p>
+            ) : null}
             <form onSubmit={onSubmitForm}>
                <div className="form-group row">
                   <label htmlFor="pet" className="col-form-label col-sm-4 col-lg-2">

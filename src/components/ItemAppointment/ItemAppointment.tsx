@@ -19,15 +19,15 @@ function ItemAppointment({
    const [error, setError] = useState<boolean>(initialState.error);
    const { pet, owner, date, time, symptoms } = appointment;
 
-   const onChangeField = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+   const onChangeField = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
       setAppointment({
          ...appointment,
-         [e.target.name]: e.target.value
+         [event.target.name]: event.target.value
       });
    };
 
-   const onSubmitEdit = (e: FormEvent<HTMLFormElement>): void => {
-      e.preventDefault();
+   const onSubmitEdit = (event: FormEvent<HTMLFormElement>): void => {
+      event.preventDefault();
       const { pet, owner, date, time, symptoms } = appt;
       if (someAreEmpty(pet, owner, date, time, symptoms)) {
          setError(true);
@@ -45,9 +45,7 @@ function ItemAppointment({
 
    const onStartEditing = () => {
       setIsEditMode(true);
-      setAppointment({
-         ...appointment,
-      });
+      setAppointment({ ...appointment });
    };
 
    return (
@@ -63,15 +61,11 @@ function ItemAppointment({
                </div>
             ) : (
                <>
-                  {
-                     error
-                        ? (
-                           <div className="aler alert-danger mb-3 p-2 text-center">
-                              All fields are required
-                           </div>
-                        )
-                        : null
-                  }
+                  {error ? (
+                     <div className="aler alert-danger mb-3 p-2 text-center">
+                        All fields are required
+                     </div>
+                  ) : null}
                   <form onSubmit={onSubmitEdit}>
                      <div className="form-group row">
                         <label className="col-form-label col-sm-4 col-lg-2">
